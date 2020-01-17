@@ -7,14 +7,14 @@ const ENDPOINTS = {
 
 class AuthService {
   login = async credentials => {
-
+    console.log(credentials);
     const { data } = await httpClient.getApiClient().post(
       ENDPOINTS.AUTH_LOGIN,
       credentials
     );
 
     await localStorage.setItem('token', data.access_token);
-    
+    window.location.href = "/";
 
     // this.attachHeaders({
     //   Authorization: `Bearer ${data.token}`

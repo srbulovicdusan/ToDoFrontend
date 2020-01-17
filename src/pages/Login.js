@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { loginUser } from "../store/user/actions";
-function Login() {
+import {Button, TextField, Card, CardContent, CardActions} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const Login = () => {
   
 
   const dispatch = useDispatch();
@@ -10,7 +13,6 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const submitLogin = () =>{
-      console.log("asdasdasdd")
     dispatch(
         loginUser({
           email,
@@ -18,27 +20,50 @@ function Login() {
         })
       );
   };
+  const classes = useStyles();
+  const bull = <span className={classes.bullet}>•</span>;
   return (
-    <div>
-      <p>Hello</p>
-      <h2>Email</h2>
-      <input 
-        type="text" 
-        name="username" 
-        value={email}
-        onChange = {(event)=>{setEmail(event.value)}}
-        />
-      <h2>Password</h2>
-      <input 
-        type="password" 
-        name="password" 
-        value={password}
-        onChange = {(event)=>{setPassword(event.value)}}
-        />
-      <button 
-        onClick={submitLogin}
-      >Login</button>
-    </div>
+    
+      
+      <Card className = {classes.card}>
+      <CardContent>
+          <TextField id="standard-basic" label="Email"
+            type="text" 
+            name="username" 
+            value={email}
+            onChange = {(event)=>{setEmail(event.target.value)}}
+            />
+          <TextField id="standard-basic" label="Password"
+            type="password" 
+            name="password" 
+            value={password}
+            onChange = {(event)=>{setPassword(event.target.value)}}
+            />
+        </CardContent>
+        <CardActions >
+          <Button className={classes.button} variant="contained" color="primary"
+              onClick={submitLogin}
+          >Login</Button>
+      </CardActions>
+      </Card>
+    
   );
 }
+
+const useStyles = makeStyles({
+  card: {
+    minWidth: 275,
+    width: '20%',
+    marginLeft: '40%',
+    marginTop : '5%',
+    textAlign: 'center',
+
+  },
+  field: {
+    margin : 'auto',
+  },
+  button:{
+    margin: 'auto'
+  }
+});
 export default Login;
