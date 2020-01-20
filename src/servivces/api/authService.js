@@ -1,5 +1,4 @@
 import httpClient from '../HttpBaseClient';
-import { history } from '../../index';
 
 const ENDPOINTS = {
   AUTH_REGISTRATION: '/auth/registration',
@@ -10,25 +9,18 @@ const ENDPOINTS = {
 class AuthService {
 
   login = async credentials => {
-    console.log(credentials);
     const { data } = await httpClient.getApiClient().post(
       ENDPOINTS.AUTH_LOGIN,
       credentials
     );
-    console.log("login", data)
-
-    localStorage.setItem('token', data.access_token);
-    //history.push("/");
+    await localStorage.setItem('token', data.access_token);
     return data
   };
-  logout = async payload => {
-    await httpClient.getApiClient().post(
-      ENDPOINTS.AUTH_LOGOUT,
-      payload
-    );
-  }
-  registration = userData => {
-    return this.getApiClient().post(ENDPOINTS.AUTH_REGISTRATION, userData);
+  
+  registration = async userData => {
+    const{data} = await httpClient.getApiClient().post(ENDPOINTS.AUTH_REGISTRATION, userData);
+    await localStorage.setItem('token', data.access_token);
+    return data;
   };
 
 

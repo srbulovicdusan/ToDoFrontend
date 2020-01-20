@@ -5,7 +5,7 @@ import {
   
   const initialState = {
       user : null,
-      token : null
+      token : localStorage.getItem("token")
   }
   
   const userReducer = (state = initialState, { type, payload }) => {

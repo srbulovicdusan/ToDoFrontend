@@ -8,26 +8,30 @@ import {
   putUserData,
   putUserToken
 } from "./actions";
+import { history } from '../../index';
+
 import authService from "../../servivces/api/authService"
 export function* registration() {
     const { payload } = yield take(REGISTER);
-    const { data } = yield call(authService.registration, payload);
-    alert(data);
-    payload.callback();
+    const data = yield call(authService.registration, payload);
+    yield put(putUserToken(data.access_token));
+    history.push("/");
+
   }
   
   export function* login() {
     const { payload } = yield take(LOGIN);
-    const { data } = yield call(authService.login, payload);
-    console.log(data);
+    const  data  = yield call(authService.login, payload);
     yield put(putUserData(null));
-    yield put(putUserToken("token"));
+    yield put(putUserToken(data.access_token));
+    history.push("/");
   }
   
   export function* logout() {
     const { payload } = yield take(LOGOUT);
     window.localStorage.clear();
+    console.log("usao u login")
     yield put(putUserToken(null));
     yield put(putUserData(null));
-    payload.callback();
+    
   }

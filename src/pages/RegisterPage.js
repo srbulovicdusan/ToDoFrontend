@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../store/user/actions";
+import { registerUser } from "../store/user/actions";
 import {Button, TextField, Card, CardContent, CardActions} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {connect} from 'react-redux';
-const Login = (props) => {
+const RegisterPage = (props) => {
   
   const dispatch = useDispatch();
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const token = useSelector((state) => state.userReducer.token)
-  const submitLogin = () =>{
+  const [name, setName] = useState("");
+  const submitRegistration = () =>{
+    console.log("usao u submut reg")
     dispatch(
-        loginUser({
+        
+        registerUser({
+          name,
           email,
           password
         })
@@ -26,6 +29,12 @@ const Login = (props) => {
       
       <Card className = {classes.card}>
       <CardContent>
+          <TextField id="standard-basic" label="Name"
+            type="text" 
+            name="name" 
+            value={name}
+            onChange = {(event)=>{setName(event.target.value)}}
+            />
           <TextField id="standard-basic" label="Email"
             type="text" 
             name="username" 
@@ -41,8 +50,8 @@ const Login = (props) => {
         </CardContent>
         <CardActions >
           <Button className={classes.button} variant="contained" color="primary"
-              onClick={submitLogin}
-          >Login</Button>
+              onClick={submitRegistration}
+          >Register</Button>
       </CardActions>
       </Card>
     
@@ -66,4 +75,4 @@ const useStyles = makeStyles({
   }
 });
 
-export default Login
+export default RegisterPage

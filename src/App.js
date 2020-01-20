@@ -4,6 +4,7 @@ import './App.css';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import LoginPage from './pages/Login';
 import HomePage from './pages/HomePage';
+import RegisterPage from './pages/RegisterPage'
 import {connect} from 'react-redux';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -28,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 function App(props) {
-  console.log(props)
+  console.log(props.token, "tokennn")
   const darkTheme = createMuiTheme({
     palette: {
       type: 'dark',
@@ -50,15 +51,18 @@ function App(props) {
           <Typography variant="h6" className={classes.title}>
             ToDo
           </Typography>
-          {localStorage.getItem("token") != null ? <Button color="inherit">ToDo</Button> : null}
-          {localStorage.getItem("token") == null? <Link style={{textDecoration: "none"}} to="/login"><Button style={{color:"white", textDecoration: "none"}}>Login </Button></Link> : null}
-          {localStorage.getItem("token")!= null ? <Button onClick={props.logout} color="inherit">Logout</Button> : null}
+          {props.token != null ? <Button color="inherit">ToDo</Button> : null}
+          {props.token == null? <Link style={{textDecoration: "none"}} to="/login"><Button style={{color:"white", textDecoration: "none"}}>Login </Button></Link> : null}
+          {props.token == null? <Link style={{textDecoration: "none"}} to="/register"><Button style={{color:"white", textDecoration: "none"}}>Register </Button></Link> : null}
+
+          {props.token!= null ? <Button onClick={props.logout} color="inherit">Logout</Button> : null}
         </Toolbar>
       </AppBar>
     </div>
       <Switch>
       <Route exact path="/" component={HomePage} />
-      {localStorage.getItem("token") == null? <Route exact path="/login" component={LoginPage} /> : null}
+      {props.token == null? <Route exact path="/login" component={LoginPage} /> : null}
+      {props.token == null? <Route exact path="/register" component={RegisterPage} /> : null}
       <Redirect from="/" to="/"/>
       </Switch>
     </ThemeProvider>
