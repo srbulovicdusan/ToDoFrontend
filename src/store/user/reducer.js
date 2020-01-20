@@ -4,8 +4,8 @@ import {
   } from './constants';
   
   const initialState = {
-      user : {},
-      token : {}
+      user : null,
+      token : null
   }
   
   const userReducer = (state = initialState, { type, payload }) => {
@@ -27,7 +27,7 @@ import {
   function putUserData(state, payload) {
     return {
       ...state,
-      ...payload
+      user : payload
     };
   }
   

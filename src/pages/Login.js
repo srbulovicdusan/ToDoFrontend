@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../store/user/actions";
 import {Button, TextField, Card, CardContent, CardActions} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
-const Login = () => {
+import {connect} from 'react-redux';
+const Login = (props) => {
   
-
+  console.log(props);
   const dispatch = useDispatch();
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const token = useSelector((state) => state.userReducer.token)
+  console.log({ token })
   const submitLogin = () =>{
+    console.log(props);
     dispatch(
         loginUser({
           email,
@@ -66,4 +68,5 @@ const useStyles = makeStyles({
     margin: 'auto'
   }
 });
-export default Login;
+
+export default Login

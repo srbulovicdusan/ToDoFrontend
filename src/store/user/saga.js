@@ -19,10 +19,9 @@ export function* registration() {
   export function* login() {
     const { payload } = yield take(LOGIN);
     const { data } = yield call(authService.login, payload);
-    yield put(putUserData(data));
-    yield put(putUserToken(data.token));
-    alert(data);
-    payload.callback();
+    console.log(data);
+    yield put(putUserData(null));
+    yield put(putUserToken("token"));
   }
   
   export function* logout() {
