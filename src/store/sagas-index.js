@@ -6,7 +6,7 @@ import * as userSaga from "./user/saga";
 export default function* rootSaga() {
   let sagas = flatten(
     [
-        userSaga, //hotelSaga, airplaneTicketSaga, airlineSaga, rentACarSaga
+        userSaga, 
     ].map(
       saga => Object.keys(saga).map(sagaFunctionName => saga[sagaFunctionName])
     )
@@ -19,8 +19,7 @@ export default function* rootSaga() {
           try {
             yield call(saga);
           } catch (e) {
-            // TODO: Uncomment when finished with application
-            //yield put(putError(e.message));
+          
           }
         }
       })

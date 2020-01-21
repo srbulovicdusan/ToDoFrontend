@@ -30,7 +30,6 @@ export function* registration() {
   export function* logout() {
     const { payload } = yield take(LOGOUT);
     window.localStorage.clear();
-    console.log("usao u login")
     yield put(putUserToken(null));
     yield put(putUserData(null));
     

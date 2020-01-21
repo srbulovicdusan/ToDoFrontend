@@ -12,9 +12,7 @@ const RegisterPage = (props) => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const submitRegistration = () =>{
-    console.log("usao u submut reg")
     dispatch(
-        
         registerUser({
           name,
           email,
@@ -23,10 +21,7 @@ const RegisterPage = (props) => {
       );
   };
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
   return (
-    
-      
       <Card className = {classes.card}>
       <CardContent>
           <TextField id="standard-basic" label="Name"
@@ -54,7 +49,6 @@ const RegisterPage = (props) => {
           >Register</Button>
       </CardActions>
       </Card>
-    
   );
 }
 

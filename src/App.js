@@ -17,19 +17,10 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from 'react-router-dom';
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+import MyToolBar from './components/MyToolBar'
+import { useSelector } from 'react-redux'
+
 function App(props) {
-  console.log(props.token, "tokennn")
   const darkTheme = createMuiTheme({
     palette: {
       type: 'dark',
@@ -38,44 +29,23 @@ function App(props) {
       } 
     },
   });
-  const classes = useStyles();
+  const token = useSelector(state => state.userReducer.token)
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline/>
-      <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            ToDo
-          </Typography>
-          {props.token != null ? <Button color="inherit">ToDo</Button> : null}
-          {props.token == null? <Link style={{textDecoration: "none"}} to="/login"><Button style={{color:"white", textDecoration: "none"}}>Login </Button></Link> : null}
-          {props.token == null? <Link style={{textDecoration: "none"}} to="/register"><Button style={{color:"white", textDecoration: "none"}}>Register </Button></Link> : null}
-
-          {props.token!= null ? <Button onClick={props.logout} color="inherit">Logout</Button> : null}
-        </Toolbar>
-      </AppBar>
-    </div>
+      
+      <MyToolBar></MyToolBar>
+    
       <Switch>
       <Route exact path="/" component={HomePage} />
-      {props.token == null? <Route exact path="/login" component={LoginPage} /> : null}
-      {props.token == null? <Route exact path="/register" component={RegisterPage} /> : null}
+      {token == null? <Route exact path="/login" component={LoginPage} /> : null}
+      {token == null? <Route exact path="/register" component={RegisterPage} /> : null}
       <Redirect from="/" to="/"/>
       </Switch>
     </ThemeProvider>
   );
 }
-const mapStateToProps = state => 
- {
-   return {token : state.userReducer.token}
-  };
-  const mapDispatchToProps = dispatch => {
-    return {
-      // dispatching plain actions
-      logout: () => dispatch({ type: 'logout' }),
-    }
-  }
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+
+export default App;
