@@ -12,7 +12,6 @@ import { useSelector, useDispatch } from 'react-redux'
 
 const MyToolBar = () =>{
     const token = useSelector(state => state.userReducer.token)
-    console.log(token);
     const dispatch = useDispatch();
     const classes = useStyles();
     const logout = ()=> dispatch({ type: 'logout' });
