@@ -1,6 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+
+import ToDos from './pages/ToDos';
+
+
 import { Route, Redirect, Switch } from 'react-router-dom';
 import LoginPage from './pages/Login';
 import HomePage from './pages/HomePage';
@@ -44,6 +48,7 @@ function App(props) {
       <Redirect from="/" to="/"/>
       </Switch>
     </ThemeProvider>
+
   );
 }
 
