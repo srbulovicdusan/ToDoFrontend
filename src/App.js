@@ -1,6 +1,10 @@
-import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ToDoModal from './components/ToDoModal';
+import Button from '@material-ui/core/Button';
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import ToDos from './pages/ToDos';
 
@@ -48,6 +52,7 @@ function App(props) {
       <Redirect from="/" to="/"/>
       </Switch>
     </ThemeProvider>
+
 
   );
 }
