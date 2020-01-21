@@ -7,16 +7,19 @@ import { Provider } from "react-redux";
 import { Router } from "react-router-dom";
 import store from "./store";
 import { createBrowserHistory } from 'history'
-
+import { ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 export const history = createBrowserHistory();
 
 ReactDOM.render(
+
   <Provider store={store}>
     <Router history={history}>
       <App />
     </Router>
   </Provider>,
+  
   document.getElementById("root")
 );
 // If you want your app to work offline and load faster, you can change
