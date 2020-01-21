@@ -17,7 +17,7 @@ function App() {
       <Button color="primary" onClick={handleShow}>
         Launch demo modal
       </Button>
-      <ToDoModal todo={todo} title="Add todo" show={show} handleClose={handleClose} handleSubmit={handleSubmit}></ToDoModal>
+      {show == true ?<ToDoModal todo={todo} title="Add todo" show={show} handleClose={handleClose} handleSubmit={handleSubmit}/>:null}
     </div>
   );
 }

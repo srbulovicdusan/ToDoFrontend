@@ -10,8 +10,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import {useState} from 'react';
 const ToDoModal = (props) =>{
-    const [text, setText] = useState(null);
-    const [completed, setCompleted] = useState(null);
+    const [text, setText] = useState(props.todo.text);
+    const [completed, setCompleted] = useState(props.todo.completed);
 
     return (<Modal show={props.show} onHide={props.handleClose}>
         <Modal.Header closeButton>
