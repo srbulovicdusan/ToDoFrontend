@@ -44,7 +44,6 @@ const ToDoComponent = (props) =>{
         return "#f44336";
       }
     }  
-    console.log(props.todo.completed)
     return (
       <div>
         <Card className={classes.card} >

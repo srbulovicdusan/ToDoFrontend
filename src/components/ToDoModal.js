@@ -61,7 +61,7 @@ const ToDoModal = (props) =>{
             style={{float:"right"}}
             control={
               <Checkbox
-                defaultChecked={props.todo.completed === 1 ? true: false}
+                defaultChecked={props.todo.completed == 1 ? true: false}
                 disabled={false}
                 onChange={(event)=>{ setCompleted(!completed)}}
                 color="primary"

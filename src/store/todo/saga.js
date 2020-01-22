@@ -22,7 +22,6 @@ export function* allTodos() {
   }
 export function* updateTodo(){
   const {payload} = yield take(UPDATE_TODO);
-  console.log(payload)
   const data = yield call(todoService.updateTodo, payload);
   yield put(putExistingTodo(data));
 }
@@ -33,23 +32,6 @@ export function* deleteTodo(){
 }
 export function* addTodo(){
   const{payload} = yield take(CREATE_TODO);
-  console.log(payload)
   const data = yield call(todoService.addNewTodo, payload);
   yield put(putNewTodo(data));
 }
-  
-//   export function* login() {
-//     const { payload } = yield take(LOGIN);
-//     const  data  = yield call(authService.login, payload);
-//     yield put(putUserData(null));
-//     yield put(putUserToken(data.access_token));
-//     history.push("/");
-//   }
-  
-//   export function* logout() {
-//     const { payload } = yield take(LOGOUT);
-//     window.localStorage.clear();
-//     yield put(putUserToken(null));
-//     yield put(putUserData(null));
-    
-//   }
