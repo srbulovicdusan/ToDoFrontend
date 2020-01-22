@@ -30,9 +30,9 @@ import { useSelector } from 'react-redux'
 function App(props) {
   const darkTheme = createMuiTheme({
     palette: {
-      type: 'dark',
+      type: 'light',
       background: {
-        default: "#303030"
+        default: "white"
       } 
     },
   });
@@ -42,12 +42,18 @@ function App(props) {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline/>
       
-      <MyToolBar></MyToolBar>
+      <MyToolBar/>
     
       <Switch>
       <Route exact path="/" component={HomePage} />
-      {token == null? <Route exact path="/login" component={LoginPage} /> : null}
-      {token == null? <Route exact path="/register" component={RegisterPage} /> : null}
+      {token === null? 
+          <div>
+              <Route exact path="/login" component={LoginPage} /> 
+              <Route exact path="/register" component={RegisterPage} />
+          </div>
+      : null}
+      
+      {token !== null? <Route exact path="/todos" component={ToDos} /> : null}
       <Redirect from="/" to="/"/>
       </Switch>
     </ThemeProvider>
