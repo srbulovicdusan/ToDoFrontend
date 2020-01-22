@@ -44,6 +44,7 @@ const ToDoComponent = (props) =>{
         return "#f44336";
       }
     }  
+    console.log(props.todo.completed)
     return (
       <div>
         <Card className={classes.card} >
@@ -60,7 +61,7 @@ const ToDoComponent = (props) =>{
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={props.todo.completed === 1 ? true: false}
+                  checked={props.todo.completed == 1 ? true: false}
                   value="true"
                   color="primary"
                 />

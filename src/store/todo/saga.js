@@ -22,6 +22,7 @@ export function* allTodos() {
   }
 export function* updateTodo(){
   const {payload} = yield take(UPDATE_TODO);
+  console.log(payload)
   const data = yield call(todoService.updateTodo, payload);
   yield put(putExistingTodo(data));
 }
@@ -32,6 +33,7 @@ export function* deleteTodo(){
 }
 export function* addTodo(){
   const{payload} = yield take(CREATE_TODO);
+  console.log(payload)
   const data = yield call(todoService.addNewTodo, payload);
   yield put(putNewTodo(data));
 }
