@@ -37,7 +37,9 @@ function App(props) {
     },
   });
   const token = useSelector(state => state.userReducer.token)
-
+  const isTokenValid = () => {
+    return token !== null ? true : false;
+  }
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline/>
@@ -46,14 +48,14 @@ function App(props) {
     
       <Switch>
       <Route exact path="/" component={HomePage} />
-      {token === null? 
+      {!isTokenValid() ? 
           <div>
               <Route exact path="/login" component={LoginPage} /> 
               <Route exact path="/register" component={RegisterPage} />
           </div>
       : null}
       
-      {token !== null? <Route exact path="/todos" component={ToDos} /> : null}
+      {isTokenValid() ? <Route exact path="/todos" component={ToDos} /> : null}
       <Redirect from="/" to="/"/>
       </Switch>
     </ThemeProvider>

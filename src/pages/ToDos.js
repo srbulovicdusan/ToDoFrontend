@@ -22,15 +22,11 @@ const ToDos = (props) =>{
         )
         handleClose();
     }
-    const allTodos = () =>{
-      dispatch(
-          getAllTodos(null)
-        );
-    };
     useEffect(() => {
       
-      allTodos();
-      console.log(todos);
+      dispatch(
+        getAllTodos(null)
+      );
 
     }, []);
     const emptyTodo = {
@@ -38,18 +34,6 @@ const ToDos = (props) =>{
       description : "",
       completed : false,
       priority : "LOW"
-    }
-    const generateTodosUi = ()=>{
-      if (todos != null){
-        todos.map(function(todo, index){
-          return (<Grid  key={index} item xs={3}> 
-            <ToDoComponent  text={todo.text} completed={todo.completed} />
-          </Grid>)
-      
-        });
-      }else{
-        return null;
-      }
     }
     return (
         <div>
@@ -61,7 +45,7 @@ const ToDos = (props) =>{
                       </Grid>)
               })}
           </Grid>
-          {show === true ? 
+          {show  ? 
             <ToDoModal 
               show={show} 
               todo={emptyTodo} 

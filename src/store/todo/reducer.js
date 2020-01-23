@@ -35,32 +35,30 @@ import {
   }
   
 function putNewTodo(state, payload) {
-    const newTodos = state.todos.slice();
-    newTodos.unshift(payload);
     return {
-      todos: newTodos
+      todos: [...state.todos, payload]
     };
 }
 function putDeleteTodo(state, payload) {
-    const todosCopy = state.todos.slice();
-    for (let i = 0; i < todosCopy.length; i++){
-      if (todosCopy[i].id == payload.id){
-        todosCopy.splice(i, 1);
-      }
-    }
-    return {
-      todos: todosCopy
-    };
+  const deleteTodoIndex = state.todos.findIndex((todo) => todo.id == payload.id)
+
+  return ({
+    ...state,
+    todos: [
+    ...state.todos.slice(0, deleteTodoIndex),
+    ...state.todos.slice(deleteTodoIndex + 1)
+   ]
+  })
 }
 function putExistingTodo(state, payload) {
-    const newTodos = state.todos.slice();
-    for (let i = 0; i < newTodos.length; i++){
-      if (newTodos[i].id == payload.id){
-        newTodos[i] = payload;
-      }
-    }
-    return {
-      todos: newTodos
-    };
+  const editTodoIndex = state.todos.findIndex((todo) => todo.id == payload.id)
+  return ({
+    ...state,
+    todos: [
+    ...state.todos.slice(0, editTodoIndex),
+    payload,
+    ...state.todos.slice(editTodoIndex + 1)
+   ]
+  })
 }
 export default todoReducer;

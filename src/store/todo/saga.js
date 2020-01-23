@@ -15,7 +15,6 @@ import { history } from '../../index';
 
 import todoService from "../../servivces/api/todoService"
 export function* allTodos() {
-
     const { payload } = yield take(GET_ALL_TODOS);
     const data = yield call(todoService.getAllTodos);
     yield put(putAllTodos(data));

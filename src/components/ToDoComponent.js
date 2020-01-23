@@ -7,14 +7,15 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import ToDoModal from './ToDoModal';
 import {useState} from 'react';
-import {updateTodo, deleteTodo} from '../store/todo/actions'
-import Box from '@material-ui/core/Box';
 import {useDispatch} from 'react-redux';
 
+import ToDoModal from './ToDoModal';
+import {updateTodo, deleteTodo} from '../store/todo/actions'
+
+
   
-const ToDoComponent = (props) =>{
+const ToDoComponent = ({todo, ...restProps}) =>{
     const classes = useStyles();
     const dispatch = useDispatch();
     //MODAL za EDIT
@@ -23,44 +24,39 @@ const ToDoComponent = (props) =>{
       setShow(false);
     }
     const handleEdit=(todo)=>{
-        dispatch(updateTodo({
-          ...todo
-        }));
+        dispatch(updateTodo(todo));
         handleClose();
     }
     const handleDelete = () =>{
       dispatch(deleteTodo({
-        id : props.todo.id
+        id : todo.id
       }));
     }
-
+    const COLOR_PER_PRIORITY = {
+      MEDIUM: "#FF8A65",
+      LOW: "#fef3bd",
+      HIGH: "#f44336"
+    } 
     const getCollor=() =>{
-      if (props.todo.priority === "LOW"){
-        return "#fef3bd";
-      }else if (props.todo.priority === "MEDIUM"){
-        return "#FF8A65";
-    
-      }else{
-        return "#f44336";
-      }
+      return COLOR_PER_PRIORITY[todo.priority];
     }  
     return (
       <div>
         <Card className={classes.card} >
           <CardContent>
             <Typography className={classes.title} variant="body2" component="h1">
-              {props.todo.title}
+              {todo.title}
               <Button style={{display:"inline",float:"right",backgroundColor:getCollor(), color:"white"}} disabled>
-              {props.todo.priority}
+              {todo.priority}
               </Button>
             </Typography>
             <Typography className={classes.content} variant="body2" component="p">
-                {props.todo.description}
+                {todo.description}
             </Typography>
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={props.todo.completed == 1 ? true: false}
+                  checked={todo.completed == 1 ? true: false}
                   value="true"
                   color="primary"
                 />
@@ -77,7 +73,7 @@ const ToDoComponent = (props) =>{
     {show === true ? 
         <ToDoModal 
           show={show} 
-          todo={props.todo} 
+          todo={todo} 
           handleSubmit={handleEdit} 
           handleClose ={handleClose}
           title="Edit todo"/> 
@@ -85,6 +81,7 @@ const ToDoComponent = (props) =>{
     </div>
     )
 }
+
 const useStyles = makeStyles({
   card: {
     minWidth: 275,
