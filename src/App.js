@@ -30,24 +30,32 @@ import { useSelector } from 'react-redux'
 function App(props) {
   const darkTheme = createMuiTheme({
     palette: {
-      type: 'dark',
+      type: 'light',
       background: {
-        default: "#303030"
+        default: "white"
       } 
     },
   });
   const token = useSelector(state => state.userReducer.token)
-
+  const isTokenValid = () => {
+    return token !== null ? true : false;
+  }
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline/>
       
-      <MyToolBar></MyToolBar>
+      <MyToolBar/>
     
       <Switch>
       <Route exact path="/" component={HomePage} />
-      {token == null? <Route exact path="/login" component={LoginPage} /> : null}
-      {token == null? <Route exact path="/register" component={RegisterPage} /> : null}
+      {!isTokenValid() ? 
+          <div>
+              <Route exact path="/login" component={LoginPage} /> 
+              <Route exact path="/register" component={RegisterPage} />
+          </div>
+      : null}
+      
+      {isTokenValid() ? <Route exact path="/todos" component={ToDos} /> : null}
       <Redirect from="/" to="/"/>
       </Switch>
     </ThemeProvider>

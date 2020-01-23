@@ -23,10 +23,9 @@ const MyToolBar = () =>{
       <Typography variant="h6" className={classes.title}>
         ToDo
       </Typography>
-      {token != null ? <Button color="inherit">ToDo</Button> : null}
       {token == null? <Link style={{textDecoration: "none"}} to="/login"><Button style={{color:"white", textDecoration: "none"}}>Login </Button></Link> : null}
       {token == null? <Link style={{textDecoration: "none"}} to="/register"><Button style={{color:"white", textDecoration: "none"}}>Register </Button></Link> : null}
-
+      {token != null ? <Link style={{textDecoration: "none"}} to="/todos"><Button style={{color:"white", textDecoration: "none"}}>To Do</Button></Link> : null}
       {token!= null ? <Button onClick={logout} color="inherit">Logout</Button> : null}
     </Toolbar>
   </AppBar>);
